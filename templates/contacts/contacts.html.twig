@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacts index{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    {% block content %}
+        <div class="container-fluid">
+            {% for message in app.flashes('contactSuccess') %}
+                <div class="p-3">
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 row m-0 align-items-center">
+                    <h5 class="col m-0 font-weight-bold text-primary">Contacts List</h5>
+                    <div class="col d-flex justify-content-end" style="float: right">
+                        <a class="create-new-btn" href="{{ path('create_contact') }}">Create new contact</a>
+                    </div>
+                </div>
+                <div class="card-body 0">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Email</th>
+                                <th>MobileNumber</th>
+                                <th>Address</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for contact in contacts %}
+                                <tr>
+                                    <td>{{ contact.title }}</td>
+                                    <td>{{ contact.firstname }}</td>
+                                    <td>{{ contact.lastname }}</td>
+                                    <td>{{ contact.email }}</td>
+                                    <td>{{ contact.mobileNumber }}</td>
+                                    <td>{{ contact.address }}</td>
+                                    <td>
+                                        <div class="row m-0 justify-content-center">
+                                            <a class="col contact-btn" href="{{ path('view_contact', {'id': contact.id}) }}">View</a>
+                                            <a class="col contact-btn" href="{{ path('edit_contact', {'id': contact.id}) }}"><i class="fas fa-edit" style="padding: 5px"></i></a>
+                                            <div class="contact-delete col" data-toggle="modal" data-target="#exampleModalCenter">
+                                                <i class="fas fa-trash" style="padding: 5px"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Confirm Delete</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p style="color: black">Are you sure, You want to delete the contact?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <form method="POST" action="{{ path('delete_contact', {'id': contact.id}) }}">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ contact.id) }}">
+                                                    <button class="contact-btn" type="submit">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

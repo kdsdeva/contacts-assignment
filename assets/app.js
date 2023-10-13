@@ -7,6 +7,12 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
+import './styles/sb-admin-2.min.css';
+import './jquery-easing/jquery.easing.min.js';
+import './js/sb-admin-2.min.js';
+import './datatables/jquery.dataTables.min.js';
+import './datatables/dataTables.bootstrap4.min.css';
+import './js/demo/datatables-demo.js';
 
 // start the Stimulus application
 import './bootstrap';

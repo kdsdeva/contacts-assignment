@@ -1,25 +1,87 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Register{% endblock %}
-{% block stylesheets %}
-    {{ parent() }}
-{% endblock %}
-{% block body %}
-    <h1>Register</h1>
+<head>
 
-    {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
-    {{ form_start(registrationForm,{ 'attr': {'novalidate': 'novalidate'} }) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-    {% block javascripts %}
-        {{ parent() }}
-    {% endblock %}
-{% endblock %}
+    <title>Register</title>
+
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+    {{ encore_entry_link_tags('app') }}
+
+</head>
+
+<body class="bg-gradient-primary">
+
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                        </div>
+                        {{ form_start(registrationForm,{ 'attr': {'novalidate': 'novalidate','class':'registration_form'} }) }}
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                {{ form_widget(registrationForm.firstname) }}
+                                {{ form_errors(registrationForm.firstname) }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form_widget(registrationForm.lastname) }}
+                                {{ form_errors(registrationForm.lastname) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(registrationForm.email) }}
+                            {{ form_errors(registrationForm.email) }}
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                {{ form_widget(registrationForm.plainPassword.first ) }}
+                                {{ form_errors(registrationForm.plainPassword.first) }}
+                            </div>
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                {{ form_widget(registrationForm.plainPassword.second) }}
+                                {{ form_errors(registrationForm.plainPassword.second) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(registrationForm.username) }}
+                            {{ form_errors(registrationForm.username) }}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                            Register Account
+                        </button>
+                        <hr>
+                        {{ form_end(registrationForm) }}
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="{{ path('app_login') }}">Already have an account? Login!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{{ encore_entry_script_tags('app') }}
+
+</body>
+
+</html>
+
+

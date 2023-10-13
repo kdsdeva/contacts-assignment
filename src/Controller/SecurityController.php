@@ -14,6 +14,9 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+         if ($this->getUser()) {
+             return $this->redirectToRoute('contactslist');
+         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
 
@@ -28,5 +31,13 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    /**
+     * @Route("/", name="home")
+     */
+    public function home()
+    {
+         return $this->redirectToRoute('contactslist');
     }
 }

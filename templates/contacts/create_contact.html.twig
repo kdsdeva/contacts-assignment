@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Contacts{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    {% block content %}
+        <div class="container-fluid h-100 row justify-content-center align-items-start p-3">
+            <h3 class="mb-3">Create new Contacts</h3>
+            <div class="contact-form card col-md-8 p-0  shadow mb-4">
+                <div class="card-header py-3">
+                    <h5 class="m-0 font-weight-bold text-primary">Create</h5>
+                </div>
+                <div class="card-body p-4">
+                    {{ form_start(form,{'attr':{'id':'create-form','novalidate':'novalidate'  }}) }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.title) }}<span class="req">*</span>
+                            </div>
+                            <div class="form-widget">
+                                {{ form_widget(form.title,{'attr':{'placeholder':'Choose your title'  }}) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.firstname) }}<span class="req">*</span>
+                            </div>
+                            <div class="form-widget">
+                                {{ form_widget(form.firstname,{'attr':{'placeholder':'Enter your Firstname' }}) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.lastname) }}<span class="req">*</span>
+
+                            </div>
+                            <div class="form-widget">
+                                {{ form_widget(form.lastname,{'attr':{'placeholder':'Enter your Lastname' }}) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.email) }}<span class="req">*</span>
+
+                            </div>
+                            <div class="form-widget">
+                                {{ form_widget(form.email,{'attr':{'placeholder':'Enter your Email' }}) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.mobileNumber) }}<span class="req">*</span>
+
+                            </div>
+                            <div class="form-widget " type="tel" id="phone">
+                                {{ form_widget(form.mobileNumber,{'attr':{'placeholder':'Enter your Mobile Number'}}) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.address) }}<span class="req">*</span>
+
+                            </div>
+                            <div class="form-widget" type="tel" id="phone">
+                                {{ form_widget(form.address,{'attr':{'placeholder':'Enter your Address' }}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 row py-3 mt-3">
+                        <div class="btn-save col-md-2">Save</div>
+                        <div class="spinner" style="display: none">
+                            <i class="fa-solid fa-spinner fa-spin" style="font-size: 20px"></i>
+                        </div>
+                        <a class="contact-btn back-to-list ml-2 col-md-2" href="{{ path('contactslist') }}">back to list</a>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    {{ parent() }}
+    <script>
+        $(document).ready( function()
+        {
+            $('.btn-save').on('click', function() {
+                $('.btn-save').hide();
+                $('.back-to-list').hide();
+                $('.spinner').show();
+                $('#create-form').submit();
+            });
+        });
+    </script>
+{% endblock %}

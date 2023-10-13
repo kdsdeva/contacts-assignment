@@ -24,6 +24,9 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Please enter a Username',
                     ]),
                 ],
+                'attr' => [
+                    'placeholder' => 'Username'
+                ]
             ])
             ->add('firstname',TextType::class,[
                 'constraints' => [
@@ -31,6 +34,9 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Please enter a Firstname',
                     ]),
                 ],
+                'attr' => [
+                    'placeholder' => 'Firstname'
+                ]
             ])
             ->add('lastname',TextType::class,[
                 'constraints' => [
@@ -38,6 +44,9 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Please enter a lastname',
                     ]),
                 ],
+                'attr' => [
+                    'placeholder' => 'Lastname'
+                ]
             ])
             ->add('email',EmailType::class,[
                 'constraints' => [
@@ -45,6 +54,9 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Please enter a valid email address.',
                     ]),
                 ],
+                'attr' => [
+                    'placeholder' => 'Email'
+                ]
             ])
             ->add('plainPassword', RepeatedType::class,
                 [
@@ -61,10 +73,14 @@ class RegistrationFormType extends AbstractType
                     ],
                     'invalid_message' => 'The new password fields must match.',
                     'first_options' => [
-                        'label' => 'New Password',
+                        'attr' => [
+                            'placeholder' => 'Password'
+                        ]
                     ],
                     'second_options' => [
-                        'label' => 'Confirm New Password',
+                        'attr' => [
+                            'placeholder' => 'Repeat Password'
+                        ]
                     ]
                 ]
             );

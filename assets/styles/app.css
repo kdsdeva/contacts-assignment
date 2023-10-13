@@ -1,3 +1,2 @@
-body {
-    background-color: #e1fcff;
-}
+@import "~bootstrap";
+@import "contact.css";
