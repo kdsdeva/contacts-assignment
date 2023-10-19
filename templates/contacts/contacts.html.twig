@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Contacts index{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
@@ -43,18 +42,18 @@
                                     <td>{{ contact.lastname }}</td>
                                     <td>{{ contact.email }}</td>
                                     <td>{{ contact.mobileNumber }}</td>
-                                    <td>{{ contact.address }}</td>
+                                    <td id="contact-address">{{ contact.address|slice(0, 10) ~ (contact.address | length > 10 ? '....' : '') }}</td>
                                     <td>
                                         <div class="row m-0 justify-content-center">
                                             <a class="col contact-btn" href="{{ path('view_contact', {'id': contact.id}) }}">View</a>
                                             <a class="col contact-btn" href="{{ path('edit_contact', {'id': contact.id}) }}"><i class="fas fa-edit" style="padding: 5px"></i></a>
-                                            <div class="contact-delete col" data-toggle="modal" data-target="#exampleModalCenter">
+                                            <div class="contact-delete col" data-toggle="modal" data-target="#deleteConfirm">
                                                 <i class="fas fa-trash" style="padding: 5px"></i>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -88,5 +87,8 @@
     {% endblock %}
 {% endblock %}
 {% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
     {{ parent() }}
 {% endblock %}

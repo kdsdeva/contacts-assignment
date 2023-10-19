@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\ContactsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ContactsRepository::class)
+ * @UniqueEntity("email",message="This email id is already used")
  */
 class Contacts
 {
@@ -34,7 +36,7 @@ class Contacts
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true,unique=true)
      */
     private $email;
 

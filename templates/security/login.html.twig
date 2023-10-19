@@ -35,6 +35,13 @@
                                     {% if error %}
                                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                                     {% endif %}
+                                    {% for message in app.flashes('success') %}
+                                        <div class="p-3">
+                                            <div class="alert alert-success">
+                                                {{ message }}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
                                     <div class="form-group">
                                         <input type="text" value="{{ last_username }}" class="form-control form-control-user"
                                                name="username" id="inputUsername"
@@ -51,6 +58,9 @@
                                     <hr>
                                 </form>
                                 <hr>
+                                <div class="text-center">
+                                    <a class="small" href="{{ path('forgotpassword') }}">Forgot Password?</a>
+                                </div>
                                 <div class="text-center">
                                     <a class="small" href="{{ path('app_register') }}">Create an Account!</a>
                                 </div>

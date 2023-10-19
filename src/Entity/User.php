@@ -6,14 +6,17 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity("email", message="Entered email is already registered")
+ * @UniqueEntity("username", message="Entered username is already registered")
  */
 class User implements UserInterface
 {
-    const PASSWORD_LENGTH = 8;
 
     /**
      * @ORM\Id
@@ -39,7 +42,8 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\Email(message="Please enter a valid email address.")
      */
     private $email;
 
@@ -58,6 +62,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Contacts::class, mappedBy="user")
      */
     private $contacts;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $permissiongranted;
 
     public function __construct()
     {
@@ -201,6 +210,18 @@ class User implements UserInterface
                 $contact->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPermissiongranted(): ?bool
+    {
+        return $this->permissiongranted;
+    }
+
+    public function setPermissiongranted(?bool $permissiongranted): self
+    {
+        $this->permissiongranted = $permissiongranted;
 
         return $this;
     }
