@@ -24,11 +24,13 @@ Clone the repository to your local machine:
 
     yarn install
 
-## Create the database schema:
+## Create the database schema and Configure .env:
 
 Configure your Symfony environment. You'll need to set up your database connection in .env and .env.test file.
 
     php bin/console doctrine:schema:update --force
+
+Configure your MAILER_DSN in .env for sending emails.
 
 ## Unit Testing
 
